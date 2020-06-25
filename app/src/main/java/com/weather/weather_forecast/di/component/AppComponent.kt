@@ -2,10 +2,7 @@ package com.weather.weather_forecast.di.component
 
 import android.app.Application
 import com.weather.weather_forecast.application.WeatherApplication
-import com.weather.weather_forecast.di.module.ActivityBuilderModule
-import com.weather.weather_forecast.di.module.RetrofitModule
-import com.weather.weather_forecast.di.module.ServiceModule
-import com.weather.weather_forecast.di.module.ViewModelModule
+import com.weather.weather_forecast.di.module.*
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -16,6 +13,7 @@ import javax.inject.Singleton
     modules = [
         AndroidInjectionModule::class,
         ActivityBuilderModule::class,
+        FragmentBuilderModule::class,
         RetrofitModule::class,
         ServiceModule::class,
         ViewModelModule::class]
