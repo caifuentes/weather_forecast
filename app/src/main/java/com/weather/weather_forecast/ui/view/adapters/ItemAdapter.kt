@@ -4,12 +4,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.weather.weather_forecast.R
 import com.weather.weather_forecast.data.models.Details
 import com.weather.weather_forecast.databinding.AdapterItemBinding
+import com.weather.weather_forecast.ui.view.fragments.DetailsFragment
 
 class ItemAdapter :  ListAdapter<Details, ItemAdapter.ItemViewHolder>(
     object : DiffUtil.ItemCallback<Details>() {
@@ -33,7 +35,8 @@ class ItemAdapter :  ListAdapter<Details, ItemAdapter.ItemViewHolder>(
 
     private fun createOnClickListener(id: Int): View.OnClickListener {
         return View.OnClickListener {
-
+            val detailsFragment = DetailsFragment.newInstance(id)
+//            it.findNavController().navigate(detailsFragment)
         }
     }
 
