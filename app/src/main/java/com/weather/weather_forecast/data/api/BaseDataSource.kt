@@ -1,4 +1,4 @@
-package com.weather.weather_forecast.api
+package com.weather.weather_forecast.data.api
 
 import retrofit2.Response
 import timber.log.Timber

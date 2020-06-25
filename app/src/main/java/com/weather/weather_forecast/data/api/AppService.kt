@@ -1,4 +1,4 @@
-package com.weather.weather_forecast.api
+package com.weather.weather_forecast.data.api
 
 import com.weather.weather_forecast.data.models.Cities
 import com.weather.weather_forecast.data.models.Details

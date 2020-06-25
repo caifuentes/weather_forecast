@@ -1,4 +1,4 @@
-package com.weather.weather_forecast.api
+package com.weather.weather_forecast.data.api
 
 data class Result<out T>(val status: Status, val data: T?, val message: String?) {
 

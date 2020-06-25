@@ -3,7 +3,7 @@ package com.weather.weather_forecast.di.module
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.weather.weather_forecast.api.AppService
+import com.weather.weather_forecast.data.api.AppService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

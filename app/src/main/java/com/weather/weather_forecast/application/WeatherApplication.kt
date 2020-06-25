@@ -13,7 +13,7 @@ class WeatherApplication : Application(), HasAndroidInjector {
 
     override fun onCreate() {
         super.onCreate()
-        
+
         AppInjector.init(this)
     }
 
