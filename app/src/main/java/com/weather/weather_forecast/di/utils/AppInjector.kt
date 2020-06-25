@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.weather.weather_forecast.application.WeatherApplication
+import com.weather.weather_forecast.di.component.DaggerAppComponent
 import dagger.android.AndroidInjection
 import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection

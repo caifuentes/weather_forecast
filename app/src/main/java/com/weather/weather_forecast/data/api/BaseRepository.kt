@@ -3,7 +3,7 @@ package com.weather.weather_forecast.data.api
 import retrofit2.Response
 import timber.log.Timber
 
-abstract class BaseDataSource {
+abstract class BaseRepository {
 
     protected suspend fun <T> getResult(call: suspend () -> Response<T>): Result<T> {
         try {
