@@ -47,6 +47,10 @@ class MainFragment : Fragment(), Injectable {
         )
         recyclerView.adapter = adapter
 
+        swipeRefreshLayout.setOnRefreshListener {
+            getList()
+        }
+
         viewModel = injectViewModel(viewModelFactory)
         getList()
     }
@@ -55,15 +59,18 @@ class MainFragment : Fragment(), Injectable {
         viewModel.getList("1701668,3067696,1835848").observe(viewLifecycleOwner, Observer { result ->
             when (result.status) {
                 Result.Status.SUCCESS -> {
+                    swipeRefreshLayout.isRefreshing = false
                     if (result.data != null) {
                         result.data.let { adapter.submitList(it.list) }
                     }
                     Timber.e("Result Success ${result.data?.list?.size}")
                 }
                 Result.Status.LOADING -> {
+                    swipeRefreshLayout.isRefreshing = true
                     Timber.e("Loading")
                 }
                 Result.Status.ERROR -> {
+                    swipeRefreshLayout.isRefreshing = false
                     Timber.e("Result Error ${result.message}")
                 }
             }
