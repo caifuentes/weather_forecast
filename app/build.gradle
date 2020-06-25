@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -7,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.weather.weather_forecast"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -20,6 +21,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -37,4 +43,16 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
     implementation 'com.squareup.okhttp3:okhttp:3.13.1'
+
+    // tools
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    // dagger
+    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger_version"
+    implementation "com.google.dagger:dagger:$rootProject.dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$rootProject.dagger_version"
+
+    // lifecycle
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-alpha04'
 }
