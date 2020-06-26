@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Weather Forecast</string>
+    <string name="empty_string"> </string>
+    <string name="celsius">%1$s°C</string>
+    <string name="format">%.1f</string>
+    <string name="high_low_celsius">High %1$s°C / Low %2$s°C</string>
 </resources>

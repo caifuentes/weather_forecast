@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
+
+        <variable
+            name="details"
+            type="com.weather.weather_forecast.data.models.Details"/>
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="6dp"
+        android:layout_marginBottom="10dp"
+        android:onClick="@{clickListener}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="18dp">
+
+            <TextView
+                android:id="@+id/txt_temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.format(@string/celsius, String.format(@string/format, details.main.temp))}"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/txt_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{details.name}"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="14dp"
+                app:layout_constraintTop_toBottomOf="@+id/txt_temperature"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:id="@+id/txt_weather_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{details.weather.size > 0 ? details.weather.get(0).main : @string/empty_string}"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="14dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/txt_temperature"
+                app:layout_constraintStart_toEndOf="@+id/txt_location"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <ImageView
+                android:id="@+id/img_favorite"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/ic_favorite_black"
+                android:visibility="@{details.favorite ? View.VISIBLE : View.GONE}"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

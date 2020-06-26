@@ -14,12 +14,12 @@ interface AppService {
         const val DEFAULT_UNIT = "metric"
     }
 
-    @GET("group/")
+    @GET("group")
     suspend fun getCityList(@Query("id") id: String,
                             @Query("units") units: String,
                             @Query("appid") appId: String): Response<Cities>
 
-    @GET("weather/")
+    @GET("weather")
     suspend fun getDetails(@Query("id") id: Int,
                            @Query("units") units: String,
                            @Query("appid") appId: String): Response<Details>

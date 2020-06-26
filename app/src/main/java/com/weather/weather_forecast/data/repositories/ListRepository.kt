@@ -6,7 +6,8 @@ import javax.inject.Inject
 
 class ListRepository @Inject constructor(private val appService: AppService) : BaseRepository() {
 
-    suspend fun getList(ids: String) = getResult { appService.getCityList(
+    suspend fun getList(ids: String) = getResult {
+        appService.getCityList(
         ids, AppService.DEFAULT_UNIT, AppService.API_KEY
     )}
 }

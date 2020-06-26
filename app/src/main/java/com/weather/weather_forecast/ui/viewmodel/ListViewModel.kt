@@ -13,7 +13,12 @@ class ListViewModel @Inject constructor(private val repository: ListRepository) 
         emit(Result.loading(data = null))
 
         try {
-            emit(Result.success(data = repository.getList(ids)))
+            val responseStatus = repository.getList(ids)
+            if (responseStatus.status == Result.Status.SUCCESS) {
+                emit(Result.success(data = responseStatus.data))
+            } else {
+                emit(Result.error(data = null, message = responseStatus.message ?: "Error Occurred!"))
+            }
         } catch (exception: Exception) {
             emit(Result.error(data = null, message = exception.message ?: "Error Occurred!"))
         }

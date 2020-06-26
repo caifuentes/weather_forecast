@@ -12,10 +12,10 @@ data class Main(
     val feelsLike: Double,
     @SerializedName("temp_min")
     @Expose
-    val tempMin: Int,
+    val tempMin: Double,
     @SerializedName("temp_max")
     @Expose
-    val tempMax: Int,
+    val tempMax: Double,
     @SerializedName("pressure")
     @Expose
     val pressure: Int,

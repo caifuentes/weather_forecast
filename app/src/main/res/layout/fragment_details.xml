@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="faveClick"
+            type="android.view.View.OnClickListener"/>
+
+        <variable
+            name="details"
+            type="com.weather.weather_forecast.data.models.Details"/>
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            tools:context=".ui.view.fragments.DetailsFragment"
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/txt_location"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@{details.name}"/>
+
+            <TextView
+                android:id="@+id/txt_temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="28sp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/txt_location"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/txt_high_low_temp"
+                android:text="@{String.format(@string/celsius, String.format(@string/format, details.main.temp))}"/>
+
+            <TextView
+                android:id="@+id/txt_weather_main"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toBottomOf="@id/txt_location"
+                app:layout_constraintStart_toEndOf="@+id/txt_temperature"
+                android:text="@{details.weather.size > 0 ? details.weather.get(0).main : @string/empty_string}"/>
+
+            <TextView
+                android:id="@+id/txt_high_low_temp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/txt_weather_main"
+                app:layout_constraintStart_toEndOf="@+id/txt_temperature"
+                android:text="@{String.format(@string/high_low_celsius, String.format(@string/format, details.main.tempMax), String.format(@string/format, details.main.tempMin))}"/>
+
+            <ImageView
+                android:id="@+id/img_favorite"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/ic_favorite_border_black"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>
