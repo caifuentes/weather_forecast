@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.weather.weather_forecast.data.api.Result
 import com.weather.weather_forecast.databinding.FragmentDetailsBinding
 import com.weather.weather_forecast.di.utils.Injectable
@@ -16,11 +17,9 @@ import kotlinx.android.synthetic.main.fragment_details.*
 import timber.log.Timber
 import javax.inject.Inject
 
-private const val CITY_ID = "city_id"
-
 class DetailsFragment : Fragment(), Injectable {
 
-    private var cityId: Int? = null
+    private val args: DetailsFragmentArgs by navArgs()
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: DetailsViewModel
@@ -28,9 +27,6 @@ class DetailsFragment : Fragment(), Injectable {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            cityId = it.getInt(CITY_ID)
-        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -55,7 +51,7 @@ class DetailsFragment : Fragment(), Injectable {
     }
 
     private fun getDetails() {
-        viewModel.getDetails(cityId!!).observe(viewLifecycleOwner, Observer { result ->
+        viewModel.getDetails(args.id).observe(viewLifecycleOwner, Observer { result ->
             when (result.status) {
                 Result.Status.SUCCESS -> {
                     swipeRefreshLayout.isRefreshing = false
@@ -82,17 +78,7 @@ class DetailsFragment : Fragment(), Injectable {
 
     private fun createOnClickListener(): View.OnClickListener {
         return View.OnClickListener {
-            // Update Local DB for favorite
-        }
-    }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(cityId: Int) =
-            DetailsFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(CITY_ID, cityId)
-                }
-            }
+        }
     }
 }

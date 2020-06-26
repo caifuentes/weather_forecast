@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.weather.weather_forecast.R
 import com.weather.weather_forecast.data.models.Details
 import com.weather.weather_forecast.databinding.AdapterItemBinding
-import com.weather.weather_forecast.ui.view.fragments.DetailsFragment
+import com.weather.weather_forecast.ui.view.fragments.MainFragmentDirections
 
 class ItemAdapter :  ListAdapter<Details, ItemAdapter.ItemViewHolder>(
     object : DiffUtil.ItemCallback<Details>() {
@@ -35,8 +35,8 @@ class ItemAdapter :  ListAdapter<Details, ItemAdapter.ItemViewHolder>(
 
     private fun createOnClickListener(id: Int): View.OnClickListener {
         return View.OnClickListener {
-            val detailsFragment = DetailsFragment.newInstance(id)
-//            it.findNavController().navigate(detailsFragment)
+            val detailsFragment = MainFragmentDirections.actionMainFragmentToDetailsFragment(id)
+            it.findNavController().navigate(detailsFragment)
         }
     }
 

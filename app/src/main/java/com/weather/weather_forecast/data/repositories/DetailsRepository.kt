@@ -8,5 +8,5 @@ class DetailsRepository @Inject constructor(private val appService: AppService) 
 
     suspend fun getDetails(id: Int) = getResult { appService.getDetails(
         id, AppService.DEFAULT_UNIT, AppService.API_KEY
-    )}.data
+    )}
 }
