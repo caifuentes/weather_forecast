@@ -71,4 +71,8 @@ dependencies {
     // navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$rootProject.nav_version"
+
+    // shared preferences
+    implementation 'com.pixplicity.easyprefs:library:1.9.0'
+
 }

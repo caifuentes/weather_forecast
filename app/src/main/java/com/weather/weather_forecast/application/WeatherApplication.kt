@@ -1,6 +1,8 @@
 package com.weather.weather_forecast.application
 
 import android.app.Application
+import android.content.ContextWrapper
+import com.pixplicity.easyprefs.library.Prefs
 import com.weather.weather_forecast.di.utils.AppInjector
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -13,6 +15,13 @@ class WeatherApplication : Application(), HasAndroidInjector {
 
     override fun onCreate() {
         super.onCreate()
+
+        Prefs.Builder()
+            .setContext(this)
+            .setMode(ContextWrapper.MODE_PRIVATE)
+            .setPrefsName(packageName)
+            .setUseDefaultSharedPreference(true)
+            .build()
 
         AppInjector.init(this)
     }

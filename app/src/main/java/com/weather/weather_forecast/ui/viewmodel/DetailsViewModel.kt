@@ -23,8 +23,4 @@ class DetailsViewModel @Inject constructor(private val repository: DetailsReposi
             emit(Result.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
     }
-
-    fun addToFavorites(id: Int) {
-
-    }
 }

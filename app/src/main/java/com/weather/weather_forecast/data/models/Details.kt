@@ -21,6 +21,5 @@ data class Details(
     val id: Int,
     @SerializedName("name")
     @Expose
-    val name: String,
-    var favorite: Boolean = false
+    val name: String
 )

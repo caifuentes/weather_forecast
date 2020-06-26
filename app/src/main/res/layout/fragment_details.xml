@@ -3,12 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View"/>
-
-        <variable
-            name="faveClick"
-            type="android.view.View.OnClickListener"/>
-
         <variable
             name="details"
             type="com.weather.weather_forecast.data.models.Details"/>
