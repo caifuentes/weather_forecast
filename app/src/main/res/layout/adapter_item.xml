@@ -72,7 +72,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:src="@drawable/ic_favorite_black"
-                android:visibility="@{details.favorite ? View.VISIBLE : View.GONE}"/>
+                android:visibility="gone"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

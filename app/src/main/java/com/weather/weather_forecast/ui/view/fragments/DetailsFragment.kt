@@ -8,11 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import com.weather.weather_forecast.R
 import com.weather.weather_forecast.data.api.Result
 import com.weather.weather_forecast.databinding.FragmentDetailsBinding
 import com.weather.weather_forecast.di.utils.Injectable
 import com.weather.weather_forecast.di.utils.injectViewModel
 import com.weather.weather_forecast.ui.viewmodel.DetailsViewModel
+import com.weather.weather_forecast.utils.SharedPrefUtils
 import kotlinx.android.synthetic.main.fragment_details.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -46,8 +48,13 @@ class DetailsFragment : Fragment(), Injectable {
         swipeRefreshLayout.setOnRefreshListener {
             getDetails()
         }
+        img_favorite.setOnClickListener {
+            SharedPrefUtils.updateFavorites(args.id.toString())
+            configureFavorites()
+        }
         viewModel = injectViewModel(viewModelFactory)
         getDetails()
+        configureFavorites()
     }
 
     private fun getDetails() {
@@ -57,7 +64,6 @@ class DetailsFragment : Fragment(), Injectable {
                     swipeRefreshLayout.isRefreshing = false
                     if (result.data != null) {
                         binding.apply {
-                            faveClick = createOnClickListener()
                             details = result.data
                             executePendingBindings()
                         }
@@ -76,9 +82,14 @@ class DetailsFragment : Fragment(), Injectable {
         })
     }
 
-    private fun createOnClickListener(): View.OnClickListener {
-        return View.OnClickListener {
-
-        }
+    private fun configureFavorites() {
+        val faves = SharedPrefUtils.getFavorites()
+        img_favorite.setImageResource(
+            if (faves.isNotEmpty() && args.id.toString() in faves) {
+                R.drawable.ic_favorite_black
+            } else {
+                R.drawable.ic_favorite_border_black
+            }
+        )
     }
 }

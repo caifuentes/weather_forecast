@@ -12,6 +12,8 @@ import com.weather.weather_forecast.R
 import com.weather.weather_forecast.data.models.Details
 import com.weather.weather_forecast.databinding.AdapterItemBinding
 import com.weather.weather_forecast.ui.view.fragments.MainFragmentDirections
+import com.weather.weather_forecast.utils.SharedPrefUtils
+import kotlinx.android.synthetic.main.fragment_details.*
 
 class ItemAdapter :  ListAdapter<Details, ItemAdapter.ItemViewHolder>(
     object : DiffUtil.ItemCallback<Details>() {
@@ -54,6 +56,14 @@ class ItemAdapter :  ListAdapter<Details, ItemAdapter.ItemViewHolder>(
                         else -> { context.resources.getColor(R.color.colorHot) }
                     }
                 )
+
+                val faves = SharedPrefUtils.getFavorites()
+                imgFavorite.visibility =
+                    if (faves.isNotEmpty() && itemDetail.id.toString() in faves) {
+                        View.VISIBLE
+                    } else {
+                        View.GONE
+                    }
 
                 clickListener = listener
                 details = itemDetail
