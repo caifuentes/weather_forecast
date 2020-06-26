@@ -1,9 +1,11 @@
 package com.weather.weather_forecast.ui.view.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +16,9 @@ import com.weather.weather_forecast.databinding.FragmentDetailsBinding
 import com.weather.weather_forecast.di.utils.Injectable
 import com.weather.weather_forecast.di.utils.injectViewModel
 import com.weather.weather_forecast.ui.viewmodel.DetailsViewModel
+import com.weather.weather_forecast.utils.DialogListener
+import com.weather.weather_forecast.utils.DialogUtils
+import com.weather.weather_forecast.utils.NetworkUtils
 import com.weather.weather_forecast.utils.SharedPrefUtils
 import kotlinx.android.synthetic.main.fragment_details.*
 import timber.log.Timber
@@ -58,6 +63,20 @@ class DetailsFragment : Fragment(), Injectable {
     }
 
     private fun getDetails() {
+        if (!NetworkUtils.isInternetAvailable(activity as Context)) {
+            DialogUtils.showMessageDialog(activity as Context,
+                requireActivity().getString(R.string.no_internet_connection),
+                requireActivity().getString(R.string.no_internet_connection_msg),
+                requireActivity().getString(R.string.ok), listener = object : DialogListener {
+                    override fun onPositiveButtonClick() {
+                        getDetails()
+                    }
+
+                    override fun onNegativeButtonClick() {}
+                })
+            return
+        }
+
         viewModel.getDetails(args.id).observe(viewLifecycleOwner, Observer { result ->
             when (result.status) {
                 Result.Status.SUCCESS -> {
@@ -77,6 +96,7 @@ class DetailsFragment : Fragment(), Injectable {
                 Result.Status.ERROR -> {
                     swipeRefreshLayout.isRefreshing = false
                     Timber.e("Result Error ${result.message}")
+                    Toast.makeText(activity, result.message, Toast.LENGTH_LONG).show()
                 }
             }
         })
