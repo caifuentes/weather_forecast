@@ -1,1 +1,3 @@
-# weather_forecast
+# Weather Forcast Application
+
+## Uses API from https://openweathermap.org/current
